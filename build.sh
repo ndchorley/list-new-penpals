@@ -2,4 +2,5 @@
 
 set -e
 
-dotnet clean && dotnet test && dotnet build --configuration Release
+dotnet clean && dotnet test && dotnet publish
+
