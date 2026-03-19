@@ -2,12 +2,15 @@
 
 open Program
 open NUnit.Framework
+open System.IO
 
 [<Test>]
 let It_shows_a_message () =
-    let mutable written = ""
-    let writeLineToString line = written <- written + line + "\n"
-    
-    run writeLineToString
+    let writer = new StringWriter()
 
-    Assert.That(written, Is.EqualTo("Listing new penpals\n"))
+    run writer.WriteLine
+
+    Assert.That(
+        writer.ToString(),
+        Is.EqualTo("Listing new penpals\n")
+    )
