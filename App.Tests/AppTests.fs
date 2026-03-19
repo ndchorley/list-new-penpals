@@ -5,12 +5,16 @@ open NUnit.Framework
 open System.IO
 
 [<Test>]
-let It_shows_a_message () =
+let It_shows_a_prompt_and_can_be_exited () =
+    let reader = new StringReader("Q\n")
     let writer = new StringWriter()
 
-    run writer.WriteLine
+    run reader writer
 
     Assert.That(
         writer.ToString(),
-        Is.EqualTo("Listing new penpals\n")
+        Is.EqualTo(
+            "enter command: \
+            \n"
+        )
     )
