@@ -1,11 +1,17 @@
 ﻿open System.IO
 
 let run (reader: TextReader) (writer: TextWriter) =
-    writer.Write("\x1B[0;35m>>\x1B[0m ")
+    let rec loop () =
+        writer.Write("\x1B[0;35m>>\x1B[0m ")
+        let commandString = reader.ReadLine()
 
-    let _ = reader.ReadLine()
-    
-    ()
+        if commandString = "Q" then ()
+        else
+            writer.WriteLine("You have no penpals to write to")
+
+            loop ()
+
+    loop ()
 
 [<EntryPoint>]
 let main _ =
