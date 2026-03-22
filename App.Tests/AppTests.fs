@@ -14,7 +14,7 @@ let It_shows_a_prompt_and_can_be_exited () =
     Assert.That(
         writer.ToString(),
         Is.EqualTo(
-            "enter command: \
+            "\x1B[0;35m>>\x1B[0m \
             \n"
         )
     )
