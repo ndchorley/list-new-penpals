@@ -5,7 +5,7 @@ let run (reader: TextReader) (writer: TextWriter) =
 
     let _ = reader.ReadLine()
     
-    writer.WriteLine("")
+    ()
 
 [<EntryPoint>]
 let main _ =
