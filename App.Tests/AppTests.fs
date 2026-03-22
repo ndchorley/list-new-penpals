@@ -1,6 +1,5 @@
 ﻿module App.Tests
 
-open Program
 open NUnit.Framework
 open System.IO
 
