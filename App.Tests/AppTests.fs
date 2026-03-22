@@ -5,7 +5,11 @@ open System.IO
 
 [<Test>]
 let It_displays_a_message_when_there_are_no_penpals_to_write_to () =
-    let reader = new StringReader("L\nQ\n")
+    let reader =
+        new StringReader(
+            "L\n\
+            Q\n"
+        )
     let writer = new StringWriter()
 
     run reader writer
