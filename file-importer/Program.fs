@@ -1,7 +1,7 @@
 ﻿let removeHeader lines =
     Seq.skip 2 lines
 
-let onlyThoseWhoHaventBeenWrittenTo lines =
+let keepOnlyThoseWhoHaventBeenWrittenTo lines =
     Seq.filter
         (fun (line: string) -> not (line.EndsWith("|x")))
         lines
@@ -61,6 +61,6 @@ let fileName =
 
 System.IO.File.ReadLines fileName
 |> removeHeader
-|> onlyThoseWhoHaventBeenWrittenTo
+|> keepOnlyThoseWhoHaventBeenWrittenTo
 |> toPenpals
 |> insertIntoDatabase
