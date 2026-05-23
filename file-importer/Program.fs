@@ -6,6 +6,25 @@ let onlyThoseWhoHaventBeenWrittenTo lines =
         (fun (line: string) -> not (line.EndsWith("|x")))
         lines
 
+type Penpal = {
+    name: string
+    address: string
+    languages: string
+}
+
+let toPenpals lines =
+    Seq.map
+        (fun (line: string) ->
+            let parts = line.Split("|")
+
+            {
+                name = parts[0];
+                address = parts[1];
+                languages = parts[2]
+            }
+        )
+        lines
+
 let fileName =
     System.Environment.GetEnvironmentVariable("HOME")
     + "/penpal_list"
@@ -13,4 +32,5 @@ let fileName =
 System.IO.File.ReadLines fileName
 |> removeHeader
 |> onlyThoseWhoHaventBeenWrittenTo
-|> Seq.iter (fun line -> printfn $"{line}")
+|> toPenpals
+|> Seq.iter (fun penpal -> printfn $"{penpal}")
