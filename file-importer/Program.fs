@@ -26,9 +26,13 @@ let toPenpals lines =
         lines
 
 let insertIntoDatabase penpals =
-    let dbFile = System.Environment.GetEnvironmentVariable("HOME") + "/penpal_list.db"
+    let dbFile =
+        System.Environment.GetEnvironmentVariable("HOME") +
+        "/penpal_list.db"
+
     let connectionString = "Data Source = " + dbFile
-    let connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString)
+    let connection =
+        new Microsoft.Data.Sqlite.SqliteConnection(connectionString)
     connection.Open()
 
     Seq.iter
