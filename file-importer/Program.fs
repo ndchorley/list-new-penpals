@@ -1,16 +1,18 @@
 ﻿let removeHeader lines =
     Seq.skip 2 lines
 
-let keepOnlyThoseWhoHaventBeenWrittenTo lines =
-    Seq.filter
-        (fun (line: string) -> not (line.EndsWith("|x")))
-        lines
-
 type Penpal = {
     name: string
     address: string
     languages: string
+    writtenTo: bool
 }
+
+
+let keepOnlyThoseWhoHaventBeenWrittenTo penpals =
+    Seq.filter
+        (fun (penpal: Penpal) -> not penpal.writtenTo)
+        penpals
 
 let toPenpals lines =
     Seq.map
@@ -21,6 +23,7 @@ let toPenpals lines =
                 name = parts[0];
                 address = parts[1];
                 languages = parts[2]
+                writtenTo = parts[3] = "x"
             }
         )
         lines
@@ -68,6 +71,6 @@ let fileName =
 
 System.IO.File.ReadLines fileName
 |> removeHeader
-|> keepOnlyThoseWhoHaventBeenWrittenTo
 |> toPenpals
+|> keepOnlyThoseWhoHaventBeenWrittenTo
 |> insertIntoDatabase
