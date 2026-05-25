@@ -8,7 +8,6 @@ type Penpal = {
     writtenTo: bool
 }
 
-
 let keepOnlyThoseWhoHaventBeenWrittenTo penpals =
     Seq.filter
         (fun (penpal: Penpal) -> not penpal.writtenTo)
@@ -66,8 +65,8 @@ let insertIntoDatabase penpals =
     connection.Close()
 
 let fileName =
-    System.Environment.GetEnvironmentVariable("HOME")
-    + "/penpal_list"
+    System.Environment.GetEnvironmentVariable("HOME") +
+    "/penpal_list"
 
 System.IO.File.ReadLines fileName
 |> removeHeader
