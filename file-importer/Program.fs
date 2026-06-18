@@ -52,11 +52,11 @@ let insertIntoDatabase penpals =
                     connection
                 )
 
-            command.Parameters.AddWithValue("$name", penpal.name)
-            command.Parameters.AddWithValue("$address", penpal.address)
-            command.Parameters.AddWithValue("languages", penpal.languages)
+            command.Parameters.AddWithValue("$name", penpal.name) |> ignore
+            command.Parameters.AddWithValue("$address", penpal.address) |> ignore
+            command.Parameters.AddWithValue("languages", penpal.languages) |> ignore
 
-            command.ExecuteNonQuery()
+            command.ExecuteNonQuery() |> ignore
 
             ()
         )
