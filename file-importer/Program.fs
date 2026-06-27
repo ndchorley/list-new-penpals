@@ -1,10 +1,12 @@
-﻿let removeHeader lines =
+﻿open Thoth.Json.Net
+
+let removeHeader lines =
     Seq.skip 2 lines
 
 type Penpal = {
     name: string
     address: string
-    languages: string
+    languages: string list
     writtenTo: bool
 }
 
@@ -12,6 +14,11 @@ let keepOnlyThoseWhoHaventBeenWrittenTo penpals =
     Seq.filter
         (fun (penpal: Penpal) -> not penpal.writtenTo)
         penpals
+
+let parseLanguages (languageString: string) =
+    languageString.Split(",")
+    |> Array.map (fun language -> language.TrimStart().TrimEnd())
+    |> List.ofArray
 
 let toPenpals lines =
     Seq.map
@@ -21,7 +28,7 @@ let toPenpals lines =
             {
                 name = parts[0];
                 address = parts[1];
-                languages = parts[2]
+                languages = parseLanguages parts[2];
                 writtenTo = parts[3] = "x"
             }
         )
@@ -34,6 +41,12 @@ let connectionFor dbFile =
         new Microsoft.Data.Sqlite.SqliteConnection(connectionString)
 
     connection
+
+let jsonOf languages =
+    languages
+    |> List.map Encode.string
+    |> Encode.list
+    |> fun json -> json.ToString()
 
 let insertIntoDatabase penpals =
     let dbFile =
@@ -54,7 +67,7 @@ let insertIntoDatabase penpals =
 
             command.Parameters.AddWithValue("$name", penpal.name) |> ignore
             command.Parameters.AddWithValue("$address", penpal.address) |> ignore
-            command.Parameters.AddWithValue("languages", penpal.languages) |> ignore
+            command.Parameters.AddWithValue("languages", jsonOf penpal.languages) |> ignore
 
             command.ExecuteNonQuery() |> ignore
 
