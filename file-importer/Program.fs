@@ -48,6 +48,21 @@ let jsonOf languages =
     |> Encode.list
     |> fun json -> json.ToString()
 
+
+let insertRow connection penpal =
+    let command =
+            new Microsoft.Data.Sqlite.SqliteCommand(
+                "INSERT INTO Penpals VALUES ($name, $address, $languages);", 
+                connection
+            )
+
+    command.Parameters.AddWithValue("$name", penpal.name) |> ignore
+    command.Parameters.AddWithValue("$address", penpal.address) |> ignore
+    command.Parameters.AddWithValue("languages", jsonOf penpal.languages) |> ignore
+
+    command.ExecuteNonQuery() |> ignore
+
+
 let insertIntoDatabase penpals =
     let dbFile =
         System.Environment.GetEnvironmentVariable("HOME") +
@@ -58,21 +73,7 @@ let insertIntoDatabase penpals =
     connection.Open()
 
     Seq.iter
-        (fun penpal ->
-            let command =
-                new Microsoft.Data.Sqlite.SqliteCommand(
-                    "INSERT INTO Penpals VALUES ($name, $address, $languages);", 
-                    connection
-                )
-
-            command.Parameters.AddWithValue("$name", penpal.name) |> ignore
-            command.Parameters.AddWithValue("$address", penpal.address) |> ignore
-            command.Parameters.AddWithValue("languages", jsonOf penpal.languages) |> ignore
-
-            command.ExecuteNonQuery() |> ignore
-
-            ()
-        )
+        (insertRow connection)
         penpals
 
     connection.Close()
