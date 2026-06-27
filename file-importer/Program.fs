@@ -1,14 +1,14 @@
 ﻿open Thoth.Json.Net
 
-let removeHeader lines =
-    Seq.skip 2 lines
-
 type Penpal = {
     name: string
     address: string
     languages: string list
     writtenTo: bool
 }
+
+let removeHeader lines =
+    Seq.skip 2 lines
 
 let keepOnlyThoseWhoHaventBeenWrittenTo penpals =
     Seq.filter
