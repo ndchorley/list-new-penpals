@@ -2,14 +2,14 @@ module App
 
 open System.IO
 
-let run (reader: TextReader) (writer: TextWriter) =
+let run (inputReader: TextReader) (outputWriter: TextWriter) =
     let rec loop () =
-        writer.Write("\x1B[0;35m>>\x1B[0m ")
-        let commandString = reader.ReadLine()
+        outputWriter.Write("\x1B[0;35m>>\x1B[0m ")
+        let commandString = inputReader.ReadLine()
 
         if commandString = "Q" then ()
         else
-            writer.WriteLine("You have no penpals to write to")
+            outputWriter.WriteLine("You have no penpals to write to")
 
             loop ()
 
