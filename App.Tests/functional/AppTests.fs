@@ -7,16 +7,15 @@ open System.IO
 [<Test>]
 let It_displays_a_message_when_there_are_no_penpals_to_write_to () =
     let inputReader =
-        new StringReader(
+        new StringReader
             "L\n\
             Q\n"
-        )
-    let outputWriter = new StringWriter()
+    let outputWriter = new StringWriter ()
 
     run inputReader outputWriter []
 
     Assert.That(
-        outputWriter.ToString(),
+        outputWriter.ToString (),
         Is.EqualTo
             "\x1B[0;35m>>\x1B[0m \
             You have no penpals to write to\n\
@@ -33,17 +32,16 @@ let It_displays_the_details_of_a_penpal_on_the_list () =
         }]
 
     let inputReader =
-        new StringReader(
+        new StringReader
             "L\n\
             Q\n"
-        )
 
-    let outputWriter = new StringWriter()
+    let outputWriter = new StringWriter ()
 
     run inputReader outputWriter penpals
 
     Assert.That(
-        outputWriter.ToString(),
+        outputWriter.ToString (),
         Is.EqualTo
             "\x1B[0;35m>>\x1B[0m \
             You have not written to:\n\
