@@ -4,10 +4,12 @@ open Penpal
 open System.IO
 
 let lineFor (languages: string list) =
+    let prefix = "who writes in "
+
     if languages.Length = 1 then
-        "who writes in " + languages.Head
+        prefix + languages.Head
     else
-        "who writes in "
+        prefix
         + languages.Head
         + ", "
         + languages.Tail.Head
