@@ -29,6 +29,7 @@ let run (inputReader: TextReader) (outputWriter: TextWriter) (penpals: Penpal li
                 outputWriter.WriteLine("You have not written to:")
                 outputWriter.WriteLine(penpal.name)
                 outputWriter.WriteLine(penpal.address)
+                outputWriter.WriteLine ""
                 outputWriter.WriteLine(lineFor penpal.languages)
                 
                 ()

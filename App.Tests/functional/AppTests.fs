@@ -48,7 +48,7 @@ let It_displays_the_details_of_a_penpal_on_the_list () =
             "\x1B[0;35m>>\x1B[0m \
             You have not written to:\n\
             Alice Jounet\n\
-            34 rue de la Paix, 30150 Aube, France\n\
+            34 rue de la Paix, 30150 Aube, France\n\n\
             who writes in French, English\n\
             \x1B[0;35m>>\x1B[0m "
     )
