@@ -5,6 +5,11 @@ let lineFor (languages: string list) =
 
     if languages.Length = 1 then
         prefix + languages.Head
+    elif languages.Length = 2 then
+        prefix
+        + languages.Head
+        + " and "
+        + languages.Tail.Head
     else
         prefix
         + languages.Head
