@@ -4,7 +4,9 @@ open Display
 open Penpal
 open System.IO
 
-let private list (outputWriter: TextWriter) (penpals: Penpal list) =
+let private list (outputWriter: TextWriter) (findPenpals: unit -> Penpal list) =
+    let penpals = findPenpals ()
+
     if penpals.IsEmpty then
         outputWriter.WriteLine "You have no penpals to write to"
     else
@@ -23,7 +25,7 @@ let run (inputReader: TextReader) (outputWriter: TextWriter) (penpals: Penpal li
 
         if commandString = "Q" then ()
         elif commandString = "L" then
-            list outputWriter penpals
+            list outputWriter (fun () -> penpals)
 
             loop ()
         else
