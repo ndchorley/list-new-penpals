@@ -12,7 +12,7 @@ let It_displays_a_message_when_there_are_no_penpals_to_write_to () =
             Q\n"
     let outputWriter = new StringWriter ()
 
-    run inputReader outputWriter []
+    run inputReader outputWriter (fun () -> [])
 
     Assert.That(
         outputWriter.ToString (),
@@ -38,7 +38,7 @@ let It_displays_the_details_of_a_penpal_on_the_list () =
 
     let outputWriter = new StringWriter ()
 
-    run inputReader outputWriter penpals
+    run inputReader outputWriter (fun () -> penpals)
 
     Assert.That(
         outputWriter.ToString (),

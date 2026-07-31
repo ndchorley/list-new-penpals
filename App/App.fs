@@ -18,14 +18,14 @@ let private list (outputWriter: TextWriter) (findPenpals: unit -> Penpal list) =
         outputWriter.WriteLine ""
         outputWriter.WriteLine (lineFor penpal.languages)
 
-let run (inputReader: TextReader) (outputWriter: TextWriter) (penpals: Penpal list) =
+let run (inputReader: TextReader) (outputWriter: TextWriter) (findPenpals: unit -> Penpal list)=
     let rec loop () =
         outputWriter.Write "\x1B[0;35m>>\x1B[0m "
         let commandString = inputReader.ReadLine ()
 
         if commandString = "Q" then ()
         elif commandString = "L" then
-            list outputWriter (fun () -> penpals)
+            list outputWriter findPenpals
 
             loop ()
         else
