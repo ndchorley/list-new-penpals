@@ -1,5 +1,6 @@
 module App.LineForLanguagesTests
 
+open Display
 open NUnit.Framework
 
 [<Test>]

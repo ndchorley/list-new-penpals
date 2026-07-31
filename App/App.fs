@@ -1,18 +1,8 @@
 module App
 
+open Display
 open Penpal
 open System.IO
-
-let lineFor (languages: string list) =
-    let prefix = "who writes in "
-
-    if languages.Length = 1 then
-        prefix + languages.Head
-    else
-        prefix
-        + languages.Head
-        + ", "
-        + languages.Tail.Head
 
 let run (inputReader: TextReader) (outputWriter: TextWriter) (penpals: Penpal list) =
     let rec loop () =
