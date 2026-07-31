@@ -3,6 +3,12 @@ module App
 open Penpal
 open System.IO
 
+let lineFor (languages: string list) =
+    "who writes in "
+    + languages.Head
+    + ", "
+    + languages.Tail.Head
+
 let run (inputReader: TextReader) (outputWriter: TextWriter) (penpals: Penpal list) =
     let rec loop () =
         outputWriter.Write("\x1B[0;35m>>\x1B[0m ")
@@ -18,12 +24,8 @@ let run (inputReader: TextReader) (outputWriter: TextWriter) (penpals: Penpal li
                 outputWriter.WriteLine("You have not written to:")
                 outputWriter.WriteLine(penpal.name)
                 outputWriter.WriteLine(penpal.address)
-                outputWriter.WriteLine(
-                    "who writes in "
-                    + penpal.languages.Head
-                    + ", "
-                    + penpal.languages.Tail.Head
-                )
+                outputWriter.WriteLine(lineFor penpal.languages)
+                
                 ()
 
             loop ()
