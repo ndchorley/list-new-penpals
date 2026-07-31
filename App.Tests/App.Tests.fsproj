@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <Compile Include="functional/AppTests.fs" />
+    <Compile Include="unit/*.fs" />
+
   </ItemGroup>
 
   <ItemGroup>

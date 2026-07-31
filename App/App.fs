@@ -4,10 +4,13 @@ open Penpal
 open System.IO
 
 let lineFor (languages: string list) =
-    "who writes in "
-    + languages.Head
-    + ", "
-    + languages.Tail.Head
+    if languages.Length = 1 then
+        "who writes in " + languages.Head
+    else
+        "who writes in "
+        + languages.Head
+        + ", "
+        + languages.Tail.Head
 
 let run (inputReader: TextReader) (outputWriter: TextWriter) (penpals: Penpal list) =
     let rec loop () =
