@@ -12,7 +12,9 @@ let It_displays_a_message_when_there_are_no_penpals_to_write_to () =
             Q\n"
     let outputWriter = new StringWriter ()
 
-    run inputReader outputWriter (fun () -> [])
+    let findNoPenpals () = []
+
+    run inputReader outputWriter findNoPenpals
 
     Assert.That(
         outputWriter.ToString (),
@@ -31,6 +33,8 @@ let It_displays_the_details_of_a_penpal_on_the_list () =
             languages = ["French"; "English"]
         }]
 
+    let findPenpals () = penpals
+
     let inputReader =
         new StringReader
             "L\n\
@@ -38,7 +42,7 @@ let It_displays_the_details_of_a_penpal_on_the_list () =
 
     let outputWriter = new StringWriter ()
 
-    run inputReader outputWriter (fun () -> penpals)
+    run inputReader outputWriter findPenpals
 
     Assert.That(
         outputWriter.ToString (),
